@@ -18,12 +18,12 @@ function connect() {
     stompClient.connect({}, function (frame) {
         setConnected(true);
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/greetings', function (greeting) {
+        stompClient.subscribe('/topic/chat/global', function (greeting) {
             showGreeting(JSON.parse(greeting.body).content);
         });
-        stompClient.subscribe('/topic/clock', function (time) {
-            showClock(JSON.parse(time.body).content);
-        })
+        // stompClient.subscribe('/topic/clock', function (time) {
+        //     showClock(JSON.parse(time.body).content);
+        // })
     });
 }
 
@@ -36,7 +36,7 @@ function disconnect() {
 }
 
 function sendName() {
-    stompClient.send("/app/hello", {}, JSON.stringify({'name': $("#name").val()}));
+    stompClient.send("/app/chat/global", {}, JSON.stringify({'content': $("#name").val()}));
 }
 
 function showGreeting(message) {

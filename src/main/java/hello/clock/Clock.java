@@ -8,8 +8,6 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import hello.Greeting;
-
 @Component
 public class Clock {
 
@@ -27,6 +25,6 @@ public class Clock {
 	public void update() {
 		Date now = new Date();
 		logger.info("Updating Clock: " + now);
-		simpMessagingTemplate.convertAndSend("/topic/clock", new Greeting(now.toString()));
+		simpMessagingTemplate.convertAndSend("/topic/clock", now.toString());
 	}
 }
